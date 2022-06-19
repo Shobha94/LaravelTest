@@ -9,9 +9,9 @@ use Tests\TestCase;
 class ExampleTest extends TestCase
 {
     public function testWarmupEvents() {
+
         $datePast = (new Carbon())->subYear()->setDay(21);
         $dateFuture = (new Carbon())->addYears(1);
-
         $response = $this->get('/warmupevents');
         $response->assertStatus(200)
             ->assertJsonCount(3)
@@ -21,10 +21,12 @@ class ExampleTest extends TestCase
     }
 
     public function testEvents() {
+      
         $datePast = (new Carbon())->subYear()->setDay(21);
         $dateFuture = (new Carbon())->addYears(1);
 
         $response = $this->get('/events');
+
         $response->assertStatus(200)
             ->assertJsonCount(3)
             ->assertJsonPath('0.name', 'Laravel convention '.$datePast->year)
@@ -38,9 +40,10 @@ class ExampleTest extends TestCase
     }
 
     public function testFutureEvents() {
+      
         $dateFuture = (new Carbon())->addYears(1);
-
         $response = $this->get('/futureevents');
+        //dd($response);
         $response->assertStatus(200)
             ->assertJsonCount(2)
             ->assertJsonPath('0.name', 'Laravel convention '.$dateFuture->year)
